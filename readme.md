@@ -1,13 +1,14 @@
 # RGBPlugins for CoreTemp
-A CoreTemp plugin [CoreTemp](https://www.alcpu.com/CoreTemp/), that controls your PC RGB LEDs based on the actual CPU temperature and CPU load.
+A [CoreTemp](https://www.alcpu.com/CoreTemp/) (alcpu) plugin , that controls your PC RGB LEDs based on the actual CPU temperature and CPU load.
 The colors (can be adjusted) are mapped from blue for cold to cyan->green->yellow->Red for Warm up to violet for critical.
 <img src="./Color-Scale.jpg">
+
 The intensity is based on the CPU load (can be disabled).
 
 ## Motherboard support. 
 The RGBPlugins solution contains two projects. Just use the one that fits your needs:
-* **MSI MysticLight**: For MSI boards supporting the MysticLight SDK [MSI SDK](http://download.msi.com/uti_exe/Mystic_light_SDK.zip). You need to install the MSI DragonCenter service with the MysticLight addon.
-* **OpenRGB**: For all Boards supported by the open source OpenRGB project [OpenRGB](https://gitlab.com/CalcProgrammer1/OpenRGB). You need to run the OpenRGB package with the Server SDK enabled.
+* **MSI MysticLight**: For MSI boards supporting the [MSI MysticLight SDK](http://download.msi.com/uti_exe/Mystic_light_SDK.zip). You need to install the MSI DragonCenter service with the MysticLight addon.
+* **OpenRGB**: For all Boards supported by the open source project [OpenRGB](https://gitlab.com/CalcProgrammer1/OpenRGB). You need to run the OpenRGB package with the Server SDK enabled.
 Some considerations:
 * The MSI Mysticlight SDK was not relaiable for a long time. Since the latest version (included in the package) it seems to connect fine. One issue (at least on my Motherboard) is that the LEDs briefly flicker every time they get a new setting.
 * OpenRGB is a very ambitious new open source project that aims to control all RGB PC devices via one interface. It is not yet very mature (as I speak it is version 0.4). It supports my MSI Motherboard board, but at startup it often doesn’t recognize the RGB hardware. 
@@ -45,5 +46,7 @@ HRangeHot2Critical=-20 // Default -20 (from 0 down to -20: Red to violet)
 ```
 The HUE 0-360 scale:
 <img src="./Hue-Scale.jpg">
+
 The code was compiled, using VS2019 Version 16.6.2
+
 Success.
