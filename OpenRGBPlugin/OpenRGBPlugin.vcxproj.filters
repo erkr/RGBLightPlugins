@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="OpenRGB SDK Files">
+      <UniqueIdentifier>{fff31d3c-2684-4ff4-8e9c-99d00507d5de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="OpenRGBPluginClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenRGBSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="net_port.h">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkClient.h">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkProtocol.h">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBController.h">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBController_Network.h">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="OpenRGBPlugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenRGBPluginClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenRGBSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_port.cpp">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkClient.cpp">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkProtocol.cpp">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBController.cpp">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBController_Network.cpp">
+      <Filter>OpenRGB SDK Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OpenRGBPlugin.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

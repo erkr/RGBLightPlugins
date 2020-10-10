@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{86a4b606-80fc-4d9f-bd44-7af927ab2de9}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CoreTempPlugin.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LaunchApp.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)mapping.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Settings.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LaunchApp.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)mapping.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Settings.cpp" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,4 @@
+LIBRARY	"MysticLightPlugin"
+EXPORTS
+	GetPlugin @1LIBRARY
+	ReleasePlugin @2LIBRARY
