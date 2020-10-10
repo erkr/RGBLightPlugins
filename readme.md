@@ -1,6 +1,7 @@
 # RGBPlugins for CoreTemp
 A [CoreTemp](https://www.alcpu.com/CoreTemp/) (alcpu) plugin , that controls your PC RGB LEDs based on the actual CPU temperature and CPU load.
 The colors (can be adjusted) are mapped from blue for cold to cyan->green->yellow->Red for Warm up to violet for critical.
+
 <img src="./Color-Scale.jpg">
 
 The intensity is based on the CPU load (can be disabled).
@@ -19,9 +20,11 @@ Within that folder, a sub-directory is needed for every CoreTemp plugin. e.g.: `
 Depending if you have a 32 or 64 bits version of CoreTemp, you copy the 32 or 64 bits version of the RGBplugin into the RGB plugin folder.
 If you use the MSI plugin version, the 32 or 64 bits SDK DLL needs to be added there as well.
 With a good old INI-file the temperature-color mapping can be adjusted. Just press the configure button in the CoreTemp plugin manager. 
-It will launch Notepad with the plugin ini file. 
+It will launch Notepad with the plugin ini file. In this INI-file both the temperature ranges and the corresponding color ranges can be adjusted. 
+
 When Notepad is closed, the new settings wil be loaded. 
-In this INI-file both the temperature ranges and the corresponding color ranges can be adjusted: 
+
+## PlugIn setting in the INI-File: 
 ```
 [OpenRGB_Settings]     // only applicable for the OpenRGB version
 OpenRGBIP=127.0.0.1    // default for local host
