@@ -60,7 +60,9 @@ void MysticLightPluginClass::Update(const LPCoreTempSharedData data)
 		}
 	}
 	catch (...) {
-		Beep(1000, 10); // unexpected
+		if (Settings.doBeepForExceptions != 0) {
+			Beep(1000, 10); // unexpected
+		}
 	}
 }
 
