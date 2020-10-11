@@ -31,6 +31,7 @@ OpenRGBIP=127.0.0.1    // default for local host
 OpenRGBPort=6742       // the default port for the Open RGB Server 
 OpenRGBMode=0          // Needs to be the direct mode, normally the first one
 [General_Settings]
+doBeepForExceptions=0  // if not zero the plugin will beep when the MSI/OpnRGB SDK throws an exception
 ControlIdx=0           // The RGB device index to be used. 
 [Core_Temp_Mappings]
 TColdBelow=25          // All CPU temps below this threshold have the HUECold color (default is Blue)
