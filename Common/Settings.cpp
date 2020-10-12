@@ -27,10 +27,10 @@ void PluginSettings::SaveSettings()
 	CString stringValue;
 
 	// General
-	stringValue.Format(L"%d", ControlIdx);
-	WritePrivateProfileString(L"General_Settings", L"ControlIdx", stringValue, FullIniName);
 	stringValue.Format(L"%d", doBeepForExceptions);
 	WritePrivateProfileString(L"General_Settings", L"doBeepForExceptions", stringValue, FullIniName);
+	stringValue.Format(L"%d", ControlIdx);
+	WritePrivateProfileString(L"General_Settings", L"ControlIdx", stringValue, FullIniName);
 	// Core Temp mappings
 	stringValue.Format(L"%d", TCold);
 	WritePrivateProfileString(L"Core_Temp_Mappings", L"TColdBelow", stringValue, FullIniName);
@@ -66,7 +66,7 @@ bool PluginSettings::ReadSettings()
 		return false;
 	}
 	// General 
-	ControlIdx = GetPrivateProfileInt(L"General_Settings", L"doBeepForExceptions", doBeepForExceptions, FullIniName);
+	doBeepForExceptions = GetPrivateProfileInt(L"General_Settings", L"doBeepForExceptions", doBeepForExceptions, FullIniName);
 	ControlIdx = GetPrivateProfileInt(L"General_Settings", L"ControlIdx", ControlIdx, FullIniName);
 	// Core Temp mappings
 	TCold     = GetPrivateProfileInt(L"Core_Temp_Mappings", L"TColdBelow", TCold, FullIniName);
