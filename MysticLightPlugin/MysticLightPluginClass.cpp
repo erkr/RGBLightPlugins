@@ -7,7 +7,7 @@
 
 using namespace std;
 
-MysticLightPluginClass::MysticLightPluginClass(void)
+MysticLightPluginClass::MysticLightPluginClass(void) 
 {
 	this->configurePlugin();
 }
@@ -21,18 +21,9 @@ int MysticLightPluginClass::Start()
 {
 	// Return 0 for success, non-zero for failure.
 	Settings.ReadSettings();
+	EL.Initialize(L"MysticLightPlugin");
+	EL.WriteInfo(L"MysticLightPlugin is Started");
 	return 0;
-#if 0  // this approach fails if MSI SDK starts after CoreTemp
-	if (ML.Connect(Settings.ControlIdx)) {
-		// switch to Steady style that allow to change colors!
-		for (int l = 0; l < ML.NrOfLEDS(); l++) {
-			ML.SetLedStyle(L"Steady", l);
-		}
-		return 0;
-	}
-	Beep(1000, 10); // unexpected
-	return 1;
-#endif
 }
 
 void MysticLightPluginClass::Update(const LPCoreTempSharedData data)
@@ -45,6 +36,7 @@ void MysticLightPluginClass::Update(const LPCoreTempSharedData data)
 				for (int l = 0; l < ML.NrOfLEDS(); l++) {
 					ML.SetLedStyle(L"Steady", l);
 				}
+				EL.WriteInfo(L"MysticLightPlugin Succesfully Connected the MSI SDK");
 			}
 		}
 		else if (data != NULL)
@@ -63,12 +55,14 @@ void MysticLightPluginClass::Update(const LPCoreTempSharedData data)
 		if (Settings.doBeepForExceptions != 0) {
 			Beep(1000, 10); // unexpected
 		}
+		EL.WriteError(L"MysticLightPlugin: Exception occured while using the Mysticlight SDK");
 	}
 }
 
 void MysticLightPluginClass::Stop()
 {
 	ML.Disconnect();
+	EL.WriteInfo(L"MysticLightPlugin is Stopped");
 }
 
 int MysticLightPluginClass::Configure()
@@ -79,6 +73,7 @@ int MysticLightPluginClass::Configure()
 	if (launchApplicationAndWait((LPWSTR)(LPCWSTR)CommandLine) == 0) // success
 	{
 		Settings.ReadSettings();
+		EL.WriteInfo(L"MysticLightPlugin Configured");
 	}
 	return 1; 
 }

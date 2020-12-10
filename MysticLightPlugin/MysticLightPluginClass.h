@@ -2,6 +2,7 @@
 #include "CoreTempPlugin.h"
 #include "CMysticLightCtrl.h"
 #include "Settings.h"
+#include "EventLog.h"
 
 class MysticLightPluginClass
 {
@@ -18,6 +19,7 @@ public:
 	LPCoreTempPlugin GetPluginInstance(HMODULE hModule);
 
 protected:
+	EventLog EL;
 	CMysticLightCtrl ML;
 	PluginSettings Settings;
 	CoreTempPlugin m_CoreTempPlugin;

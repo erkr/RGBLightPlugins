@@ -15,11 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CoreTempPlugin.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventLog.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LaunchApp.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)mapping.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Settings.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventLog.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)LaunchApp.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)mapping.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Settings.cpp" />

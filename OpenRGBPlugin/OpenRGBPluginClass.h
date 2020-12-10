@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreTempPlugin.h"
 #include "OpenRGBSettings.h"
+#include "EventLog.h"
 
 
 class OpenRGBPluginClass
@@ -18,7 +19,8 @@ public:
 	LPCoreTempPlugin GetPluginInstance(HMODULE hModule);
 
 protected:
-
+	bool wasConnected = false;
+	EventLog EL;
 	OpenRGBSettings Settings;
 	CoreTempPlugin m_CoreTempPlugin;
 	void configurePlugin();

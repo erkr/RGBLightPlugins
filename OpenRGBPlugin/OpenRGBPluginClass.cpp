@@ -59,7 +59,7 @@ RGBColor hsv2rgb(int H, double S, double V)
 	return RGB;
 }
 
-OpenRGBPluginClass::OpenRGBPluginClass(void)
+OpenRGBPluginClass::OpenRGBPluginClass(void) 
 {
 	this->configurePlugin();
 }
@@ -78,34 +78,52 @@ int OpenRGBPluginClass::Start()
 	RGBClient->SetIP(Settings.OpenRGBIP);
 	RGBClient->SetPortW(Settings.OpenRGBPort);
 	RGBClient->StartClient();
-
+	EL.Initialize(L"OpenRGBPlugin");
+	EL.WriteInfo(L"OpenRGBPlugin is Started");
 	return 0;
 }
 
 void OpenRGBPluginClass::Update(const LPCoreTempSharedData data)
 {
 	try {
-		if (data != NULL && RGBClient->GetOnline())
+		if (data != NULL)
 		{
-			// connected
-			cHSV hsv = ProcessCoreTempData(data, Settings);
-			RGBColor cRGB = hsv2rgb(hsv.H, hsv.S, hsv.V);
-			RGBClient->ControllerListMutex.lock();
-			if (control.size() > Settings.ControlIdx)
+			if (RGBClient->GetOnline())
 			{
-				if (control[Settings.ControlIdx]->GetMode() != Settings.OpenRGBMode) {
-					control[Settings.ControlIdx]->SetMode(Settings.OpenRGBMode);
+				// connected
+				if (!wasConnected)
+				{
+					wasConnected = true;
+					EL.WriteInfo(L"OpenRGBPlugin Succesfully Connected OpenRGB Server");
 				}
-				control[Settings.ControlIdx]->SetAllLEDs(cRGB);
-				control[Settings.ControlIdx]->UpdateLEDs();
+				cHSV hsv = ProcessCoreTempData(data, Settings);
+				RGBColor cRGB = hsv2rgb(hsv.H, hsv.S, hsv.V);
+				RGBClient->ControllerListMutex.lock();
+				if (control.size() > Settings.ControlIdx)
+				{
+					if (control[Settings.ControlIdx]->GetMode() != Settings.OpenRGBMode) {
+						control[Settings.ControlIdx]->SetMode(Settings.OpenRGBMode);
+					}
+					control[Settings.ControlIdx]->SetAllLEDs(cRGB);
+					control[Settings.ControlIdx]->UpdateLEDs();
+				}
+				RGBClient->ControllerListMutex.unlock();
 			}
-			RGBClient->ControllerListMutex.unlock();
+			else // NOT connected
+			{ 
+				if (wasConnected)
+				{
+					wasConnected = false;
+					EL.WriteWarning(L"OpenRGBPlugin lost connection with OpenRGB Server");
+				}
+			}
 		}
 	}
 	catch (...) {
 		if (Settings.doBeepForExceptions != 0) {
 			Beep(1000, 10); // unexpected
 		}
+		EL.WriteError(L"OpenRGBPlugin: Exception occured while using the OpenRGB SDK");
 	}
 }
 
@@ -114,6 +132,7 @@ void OpenRGBPluginClass::Stop()
 	RGBClient->StopClient();
 	delete RGBClient;
 	RGBClient = NULL;
+	EL.WriteInfo(L"OpenRGBPlugin is Stopped");
 }
 
 int OpenRGBPluginClass::Configure()
@@ -124,6 +143,7 @@ int OpenRGBPluginClass::Configure()
 	if (launchApplicationAndWait((LPWSTR)(LPCWSTR)CommandLine) == 0) // success
 	{
 		Settings.ReadSettings();
+		EL.WriteInfo(L"OpenRGBPlugin Configured");
 	}
 	return 1;
 }
