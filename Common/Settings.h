@@ -6,7 +6,7 @@ public:
 	virtual void SaveSettings();
 	virtual bool ReadSettings();
 	int  doBeepForExceptions = 0;
-	int  ControlIdx = 0;
+	CString  ControlIdx = L"0";
 	int  TCold = 25;
 	int  TWarm = 55; 
 	int  THot = 60; 

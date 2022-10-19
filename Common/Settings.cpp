@@ -29,8 +29,7 @@ void PluginSettings::SaveSettings()
 	// General
 	stringValue.Format(L"%d", doBeepForExceptions);
 	WritePrivateProfileString(L"General_Settings", L"doBeepForExceptions", stringValue, FullIniName);
-	stringValue.Format(L"%d", ControlIdx);
-	WritePrivateProfileString(L"General_Settings", L"ControlIdx", stringValue, FullIniName);
+	WritePrivateProfileString(L"General_Settings", L"ControlIdx", ControlIdx, FullIniName);
 	// Core Temp mappings
 	stringValue.Format(L"%d", TCold);
 	WritePrivateProfileString(L"Core_Temp_Mappings", L"TColdBelow", stringValue, FullIniName);
@@ -67,7 +66,12 @@ bool PluginSettings::ReadSettings()
 	}
 	// General 
 	doBeepForExceptions = GetPrivateProfileInt(L"General_Settings", L"doBeepForExceptions", doBeepForExceptions, FullIniName);
-	ControlIdx = GetPrivateProfileInt(L"General_Settings", L"ControlIdx", ControlIdx, FullIniName);
+
+	WCHAR   resultString[50];
+	if (0 < GetPrivateProfileString(L"General_Settings", L"ControlIdx", L"0", resultString, sizeof(resultString) - 1, FullIniName)) {
+		ControlIdx = resultString;
+	}
+
 	// Core Temp mappings
 	TCold     = GetPrivateProfileInt(L"Core_Temp_Mappings", L"TColdBelow", TCold, FullIniName);
 	TWarm     = GetPrivateProfileInt(L"Core_Temp_Mappings", L"TWarm", TWarm, FullIniName);
