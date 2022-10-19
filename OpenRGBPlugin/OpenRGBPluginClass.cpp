@@ -96,21 +96,37 @@ void OpenRGBPluginClass::Update(const LPCoreTempSharedData data)
 					wasConnected = true;
 					EL.WriteInfo(L"OpenRGBPlugin Succesfully Connected OpenRGB Server");
 				}
+
 				cHSV hsv = ProcessCoreTempData(data, Settings);
 				RGBColor cRGB = hsv2rgb(hsv.H, hsv.S, hsv.V);
 				RGBClient->ControllerListMutex.lock();
-				if (control.size() > Settings.ControlIdx)
-				{
-					if (control[Settings.ControlIdx]->GetMode() != Settings.OpenRGBMode) {
-						control[Settings.ControlIdx]->SetMode(Settings.OpenRGBMode);
+
+				int nTokenPos = 0;
+				CString strToken = Settings.ControlIdx.Tokenize(_T(","), nTokenPos);
+
+				while (!strToken.IsEmpty()) {
+					int idx = _ttoi(strToken);
+
+					if (control.size() > idx)
+					{
+						if (control[idx]->GetMode() != Settings.OpenRGBMode) {
+							control[idx]->SetMode(Settings.OpenRGBMode);
+						}
+						control[idx]->SetAllLEDs(cRGB);
+						control[idx]->UpdateLEDs();
 					}
-					control[Settings.ControlIdx]->SetAllLEDs(cRGB);
-					control[Settings.ControlIdx]->UpdateLEDs();
+
+					strToken = Settings.ControlIdx.Tokenize(_T(","), nTokenPos);
+
+					if (!strToken.IsEmpty()) {
+						std::this_thread::sleep_for(std::chrono::milliseconds(100));
+					}
 				}
+
 				RGBClient->ControllerListMutex.unlock();
 			}
 			else // NOT connected
-			{ 
+			{
 				if (wasConnected)
 				{
 					wasConnected = false;
@@ -164,7 +180,7 @@ void OpenRGBPluginClass::configurePlugin()
 	m_CoreTempPlugin.pluginInfo = pluginInfo;
 	pluginInfo->name = L"OpenRGB Light Plugin";
 	pluginInfo->description = L"Controls the MainBoard LED's based on CPU temp and CPU load";
-	pluginInfo->version = L"1.0";
+	pluginInfo->version = L"1.1";
 	
 	// Interface version should be 1 for current plugin API.
 	m_CoreTempPlugin.interfaceVersion = 1;

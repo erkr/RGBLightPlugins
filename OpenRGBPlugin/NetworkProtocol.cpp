@@ -17,4 +17,6 @@ NetPacketHeader * InitNetPacketHeader
     new_header->pkt_dev_idx  = pkt_dev_idx;
     new_header->pkt_id       = pkt_id;
     new_header->pkt_size     = pkt_size;
+
+    return new_header;
 }
